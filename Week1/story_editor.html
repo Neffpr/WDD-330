@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Writer</title>
+    <script>
+        function loadStory(){
+            var storyName= document.getElementById("name_input").value
+            var storyHTML= localStorage.getItem(storyName)
+            document.getElementById("story_editor").value = storyHTML
+        }
+
+        function saveStory(){
+            var storyName= document.getElementById("name_input").value
+            var storyHTML= document.getElementById("story_editor").value 
+            localStorage.setItem(storyName, storyHTML)
+        }
+
+        function displayStory(){
+            var storyHTML = document.getElementById("story_editor").value
+            document.getElementById("display_section").innerHTML = storyHTML
+        }
+
+    </script>
+    <style>
+
+        #name_input{
+            margin: 5px;
+        }
+        
+        section{
+            margin: 15px;
+        }
+
+        textarea{
+            width: 800px;
+            height: 250px;
+            background-color: rgb(248, 248, 225);
+            margin: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Story Editor</h1>
+    Story Name:<input id=name_input></input>
+    <section>
+        <button onclick="loadStory()">Find and Edit It</button>
+        <button onclick="saveStory()">Save It</button>
+        <button onclick="displayStory()">Display It</button>
+    </section>
+    <textarea id="story_editor" placeholder="Write a totally awesome story here."></textarea>
+    <section id="display_section"></section>
+</body>
+</html>

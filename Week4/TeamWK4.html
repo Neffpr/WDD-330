@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 4 Team Activity</title>
+    <link rel="stylesheet" href="team.css" />
+
+    <style>
+        .grid-container{
+            display: grid;
+            grid-template-columns: 160px 160px 160px;
+            grid-template-rows: 160px 160px 160px;
+        }
+
+
+        .grid-item{
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 100px;
+            text-align: center;
+        }
+
+        .grid-item:nth-child(1){
+            border-top-style: none;
+            border-left-style: none;
+        }
+
+        .grid-item:nth-child(2){
+            border-top-style: none;   
+        }
+
+        .grid-item:nth-child(3){
+            border-top-style: none;  
+            border-right-style: none; 
+        }
+
+        .grid-item:nth-child(4){
+            border-left-style: none;   
+        }
+
+        .grid-item:nth-child(6){
+            border-right-style: none;   
+        }
+
+        .grid-item:nth-child(7){
+            border-left-style: none;  
+            border-bottom-style: none;    
+        }
+
+        .grid-item:nth-child(8){ 
+            border-bottom-style: none;    
+        }
+
+        .grid-item:nth-child(9){
+            border-right-style: none;  
+            border-bottom-style: none;    
+        }
+    </style>
+
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+      <div class="grid-item"></div>
+    </div>
+    <br />
+    <button type="button" id="reset">Reset</button>
+    <script>
+        const  player1 = "X";
+        const  player2 = "O";
+        let currentPlayer = player1;
+
+        const gridReset = document.querySelector("#reset");
+        const gridContainer = document.querySelector(".grid-container");
+
+        gridReset.addEventListener("touchend", resetBoard);
+        gridReset.addEventListener("click", resetBoard);
+        gridContainer.childNodes.forEach(element => {
+            element.addEventListener("touchend", () => {advance(element)});
+            element.addEventListener("click", () => {advance(element)});
+        });
+
+        function advance(clickedSquare) {
+            if(clickedSquare.innerHTML === "") {
+                clickedSquare.innerHTML = currentPlayer;
+                if(currentPlayer === player1) {
+                    currentPlayer = player2;
+                } else {
+                    currentPlayer = player1;
+                }
+            }
+        }
+
+        function resetBoard() {
+            gridContainer.childNodes.forEach(element => {
+                element.innerHTML = "";
+            });
+        }
+    </script>
+  </body>
+</html>

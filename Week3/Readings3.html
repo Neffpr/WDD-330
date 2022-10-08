@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function makeUser() {
+        return {
+        name: " Hello Nefi",
+        ref() {
+            return this;
+        }
+        };
+    }
+    
+    let user = makeUser();
+    
+    alert( user.ref().name );
+
+    let calculator = {
+        sum() {
+        return this.a + this.b;
+        },
+    
+        mul() {
+        return this.a * this.b;
+        },
+    
+        read() {
+        this.a = +prompt('Introduce value A?', 0);
+        this.b = +prompt('Introduce value B?', 0);
+        }
+    };
+    
+    calculator.read();
+    alert( 'The sum of value A + B is ' + calculator.sum() );
+    alert( 'The multiplication of value A * B is ' + calculator.mul() );
+
+    let ladder = {
+        step: 0,
+        up() {
+        this.step++;
+        return this;
+        },
+        down() {
+        this.step--;
+        return this;
+        },
+        showStep() {
+        alert( 'You are in this step: ' + this.step );
+        return this;
+        }
+    };
+    
+    ladder.up().up().up().down().showStep().down().up().up().down().down().showStep(); 
+
+    const quiz = [
+        { name: "Superman",realName: "Clark Kent" },
+        { name: "Wonder Woman",realName: "Diana Prince" },
+        { name: "Batman",realName: "Bruce Wayne" },
+    ];
+
+/*     const game = {
+        start(quiz){
+            this.questions = [...quiz];
+            this.score = 0;
+            // main game loop
+            for(const question of this.questions){
+            this.question = question;
+            this.ask();
+            }
+            // end of main game loop
+            this.gameOver();
+        },
+        ask(){
+            const question = `What is ${this.question.name}'s real name?`;
+            const response =  prompt(question);
+            this.check(response);
+        },
+        check(response){
+            const answer = this.question.realName;
+            if(response === answer){
+            alert('Correct!');
+            this.score++;
+            } else {
+            alert(`Wrong! The correct answer was ${answer}`);
+            }
+        },
+        gameOver(){
+            alert(`Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
+        }
+    }
+    game.start(quiz); */
+    </script>
+
+</head>
+<body>
+
+    <h2>Using "this" in object literal</h2>
+    <p>
+        Here the function makeUser returns an object.    
+        What is the result of accessing its ref? Why?
+    </p>
+    <p>
+        The value of this inside makeUser() is undefined, because it is called as a function, not as a method with “dot” syntax. <br>
+        user.ref() is a method. And the value of this is set to the object before dot ..
+    </p>
+    <h2>Create a Calculator</h2>
+    <p>
+        The instructions to complete this activity were
+    </p>
+    <ul>
+        <li>read() prompts for two values and saves them as object properties with names a and b respectively.</li>
+        <li>sum() returns the sum of saved values.</li>
+        <li>mul() multiplies saved values and returns the result.</li>
+    </ul>
+
+    <h2>Chaining</h2>
+    <p>
+        Theres a ladder object that allows to go up and down, I didn't thought the solution would be to return the object itself from every call.<br>
+        I tried to call it once but it didn't work, also I include more steps  to the final code. 
+    </p>
+    <h2>Confused about THIS</h2>
+    <p>
+        This is a keyword whose value changes depending on how a function gets called. There six different ways where this can take on new values. They are:
+    </p>
+    <ul>
+        <li>in global context</li>
+        <li>in object construction</li>
+        <li>in an object method</li>
+        <li>in a simple function</li>
+        <li>in an arrow function</li>
+        <li>in an event listener</li>
+    </ul>
+    <p>Some definitions that will help you understand:</p>
+    <ul>
+        <li>Objects are created to represent any object (is a self-contained set of related values and functions)</li>
+        <li>Functions that are stored in object properties are called “methods”.</li>
+        <li>Function Expression is a function assigned to a property user.sayHi of the object.</li>
+        <li>To access the object, a method can use the this keyword. (The value of this is the object “before dot”)</li>
+    </ul>
+    <h2>Objects</h2>
+    <p>
+        Its like a database of values, They act as a collection of named properties that map to any JavaScript value such as strings, numbers, booleans, arrays and functions.<br>
+        An object literal is an object that is created directly in the language by wrapping all its properties and methods in curly braces {}.<br>
+        All objects are mutable at any time when a program is running. 
+        This means that its properties and methods can be changed or removed, and new properties and methods can be added to the objec
+    </p>
+    <p>I created an object for myself</p>
+
+    <section>
+        <p><strong>STOP MAKING NOTES AND FOCUS ON THE READINGS, INCLUDING THE NINJA QUIZ INSTEAD</strong></p>
+    </section>
+
+    <section class='dojo'>
+        <div class='quiz-body'>
+          <header>
+            <h1>Quiz Ninja!</h1>
+          </header>
+          <div id='score'>Score: <strong>0</strong></div>
+          <div id='question'></div>
+          <div id='result'></div>
+          <div id='info'></div>
+        </div>
+    </section>
+    <button id='start'>Click to Start</button>
+
+
+    <script>
+        // View Object
+        const view = {
+        start: document.getElementById('start'),
+        score: document.querySelector('#score strong'),
+        question: document.getElementById('question'),
+        result: document.getElementById('result'),
+        info: document.getElementById('info'),
+        render(target,content,attributes) {
+            for(const key in attributes) {
+                target.setAttribute(key, attributes[key]);
+            }
+            target.innerHTML = content;
+        },
+        show(element){
+            element.style.display = 'block';
+        },
+        hide(element){
+            element.style.display = 'none';
+        }
+        };
+
+        // Game Object
+        const game = {
+        start(quiz){
+            view.hide(view.start);
+            this.score = 0;
+            this.questions = [...quiz];
+            // main game loop
+            for(const question of this.questions){
+            this.question = question;
+            this.ask();
+            }
+            // end of main game loop
+            this.gameOver();
+        },
+        ask(){
+            const question = `What is ${this.question.name}'s real name?`;
+            view.render(view.question,question);
+            const response =  prompt(question);
+            this.check(response);
+        },
+        check(response){
+            const answer = this.question.realName;
+            if(response === answer){
+            view.render(view.result,'Correct!',{'class':'correct'});
+            alert('Correct!');
+            this.score++;
+            view.render(view.score,this.score);
+            } else {
+            view.render(view.result,`Wrong! The correct answer was ${answer}`,{'class':'wrong'});
+            alert(`Wrong! The correct answer was ${answer}`);
+            }
+        },
+        gameOver(){
+            view.show(view.start);
+            view.render(view.info,`Game Over, you scored ${this.score} point${this.score !== 1 ? 's' : ''}`);
+        }
+        }
+        view.start.addEventListener('click', () => game.start(quiz));
+
+    </script>
+
+</html>
+</body>
+</html>

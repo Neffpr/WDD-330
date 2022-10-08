@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript: Novice to Ninja, 2nd Edition</title>
+</head>
+<body>
+    <h1>Reading Notes & Examples JavaScript</h1>
+    
+    <h2>Comments</h2>
+    <p>Can you see the comments? no? Exactly!</p>
+
+    <p>
+        INTRUCTIONS TO BUILD A COMMENT:
+    </p>
+    <ul>
+        <li>Single line comments starting with //</li>
+        <li>Multi-line comments starting with /* and finishing with */</li>
+    </ul>
+    
+    <h2>Grammar</h2>
+    <p>
+        A JavaScript program is made up of a series of statements.<br>
+        Each statement ends with a new line or semicolon.<br>
+        Its considered best practice to combine the two and write each statement on a new line, terminated by a semi-colon.<br>
+        You can use as much whitespace as required to format your code so its neat and easy to read. <br><br>
+        ex.<br>
+        const message = 'Hello World!'; alert(message);
+    </p>
+
+    <h2>Reserved Words</h2>
+    <p>
+        The following words are reserved for use by the JavaScript language and cannot be used to name variables<br>
+        These words are reserved because many of them are used by the language itself
+    </p>
+    <ul>
+        <li>abstract, await, boolean, break, byte, case, catch, char, class, const, continue, debugger, default, delete, do, double, else, enum, export, extends, false, final, finally, float, for, function, goto, if, implements, import, in instanceof, int, interface, let, long, native, new, null, package, private, protected, public, return, short, static, super, switch, synchronized, this, throw, throws, transient, true, try, typeof, var, volatile, void, while, with, yield</li>                     
+    </ul>
+
+    <h2>Primitive Data Types</h2>
+    <ul>
+        <li>String</li>
+        <li>Symbol</li>
+        <li>Number</li>
+        <li>Boolean</li>
+        <li>Undefined</li>
+        <li>Null</li>
+    </ul>
+    <p>Any value that isnt one of the primitive data types listed above is an object</p>
+
+    <h2>Variables</h2>
+    <p>
+        Variables have to be declared before they can be used.<br>
+        The keyword <strong>const</strong> is used when the variable will not be reassigned to another value, whereas <strong>let</strong> is used if the variable might be reassigned later in the program.<br><br>
+        ex.<br>
+        const name = 'Alexa'; // This won't be assigned to another string<br><br>
+        You can even declare and assign multiple variables at the same time if you separate them with commas:<br><br>
+        ex.<br>
+        let x = 3, y = 4, z = 5;<br><br>
+        You should try to use <strong>const</strong> to declare most variables. This helps to avoid any bugs caused by unexpected changes in assignment.<br>
+    </p>
+
+    <h3>Scope</h3>
+    <p>
+        Using <strong>cons</strong> and <strong>let</strong> to declare variables means they are block scoped, so their value only exists inside the block they are declared in.<br>
+        Any variable declared outside of a block is said to have global scope. This means it is accessible everywhere in the program BUT While this may seem to be a good idea at first, it is not considered good practice.<br>
+        If <strong>cons</strong> or <strong>let</strong> are not used, the variable will have global scope and be available outside the block and viceversa.
+    </p>
+    <h3>Naming Constants & Variables</h3>
+    <p>Give names that describe the variables, here are some important points you should consider when naming constant and variable names</p>
+    <ul>
+        <li>names can start with any upper or lower-case letter</li>
+        <li>underscore</li>
+        <li>dollar character</li>
+        <li>they can also contain numbers, but cannot start with them</li>
+        <li>Variables that start with an underscore generally refer to private properties and methods, so it's best to not follow this convention for your own variable names.</li>
+        <li>The $ character is also used by the popular jQuery library, so using this in your variable names may also cause problems.</li>
+        <li>Constant and variable names are case sensitive</li>
+    </ul>
+    <p>
+        When using multiple words for constant and variable names there are two conventions, JavaScript’s built-in functions use the camel-case notation and this is probably the best convention to follow.
+    </p>
+    <ul>
+        <li>Underscore separates each new word with an underscore</li>
+        <li>Camel case starts with a lowercase letter and then each new word is capitalized</li>
+    </ul>
+
+    <h2>Strings</h2>
+    <h3>Backslashes</h3>
+    <ul>
+        <li>Single quote marks \'</li>
+        <li>Double quote marks \"</li>
+        <li>End of line \n</li>
+        <li>Carriage return \r</li>
+        <li>Tab \t</li>
+        <li>The backslash is used to escape special characters</li>
+    </ul>
+    <h3>Properties and Methods</h3>
+    <p>Properties are information about the object or value, while methods perform an action on the object or value</p>
+    <p>
+        We can access the properties of a string using dot notation OR an alternative notation you can use to access a primitive data type's properties are square brackets<br><br>
+        ex.<br>
+        name.length; << 5 <br>
+        name['length']; << 5
+    </p>
+    <p>
+        A method is an action that a primitive data type or object can perform. To call a method, we use the dot operator (.) followed by the name of the method, followed by parentheses<br><br>
+        ex.<br>
+        name.toUpperCase(); << 'ALEXA';
+    </p>
+    <ul>
+        <li>toUpperCase</li>
+        <li>toLowerCase</li>
+        <li>charAt - If you want to know which character is at a certain position </li>
+        <li>indexOf - If you want to find where a certain character or substring appears in a string</li>
+        <li>lastIndexOf</li>
+        <li>includes</li>
+        <li>startsWith</li>
+        <li>endsWith</li>
+        <li>concat - a shortcut for concat is to use the + operator</li>
+        <li>trim - will remove any whitespace from the beginning and end of a string</li>
+        <li>repeat</li>
+    </ul>
+    <h2>Numbers</h2>
+    <p>
+        Numbers can be integers,  or floating point numbers. JavaScript doesn’t distinguish between integers and floating point decimals
+    </p>
+    <h3>Number Methods</h3>
+    <ul>
+        <li>toExponential - this returns the number as a string in exponential notation.</li>
+        <li>toFixed - method rounds a number to a fixed number of decimal places</li>
+        <li>toPrecision -  method rounds a number to a fixed number of significant figures that is once again returned as a string</li>
+    </ul>
+    <p>Arithmetic Operations</p>
+    <ul>
+        <li>Adittion (+)</li>
+        <li>Subtraction (-)</li>
+        <li>Multiplication (*)</li>
+        <li>Division (/)</li>
+        <li>Exponentiation (**)</li>
+        <li>Remainder of a division (%)</li>
+        <li>Compound assignment operator (+=) - There are equivalent compound assignment operators for all the operators</li>
+        <li>If you only want to increment a value by 1, you can use the (++) operator</li>
+    </ul>
+    <p>
+        EXAMPLES <br><br>
+
+        points -= 5; // decreases points by 5<br>
+        << 15<br><br>
+
+        points *= 2; // doubles points<br>
+        << 30<br><br>
+
+        points /= 3; // divides value of points by 3<br>
+        << 10<br><br>
+
+        points %= 7; // changes the value of points to the remainder if its current value is divided by 7<br>
+        << 3<br><br>
+
+        let points = 5;<br>
+        points ++<br>
+        << 6
+    </p>
+    <h3>Coercion</h3>
+    <p>happens when the operands of an operator are of different types</p>
+    <p>
+        Converting Strings to Numbers<br>
+        The best way to change a string to a number is to use the Number method
+        Converting Numbers to Strings<br>
+        The preferred way of changing a number to a string is to use the String function
+    </p>
+    <h2>Logical Operators</h2>
+    <p>The results are based on whether the values are considered to be truthy or falsy.</p>
+    <ul>
+        <li>! (Logical NOT) - ! operator in front of a value will convert it to a Boolean and return the opposite value. </li>
+        <li>use double negation (!!) to find out if a value is truthy or falsy</li>
+        <li>&& (Logical AND) - The logical AND operator works on two or more values (the operands) and only evaluates to true if all the operands are truthy. </li>
+        <li>|| (Logical OR) - works on two or more operands, but evaluates to true if any of the operands are true, so it only evaluates to false if both operands are falsy. </li>
+        <li>Equality - = </li>
+        <li>Soft Equality -  use either a double equals operator, ==</li>
+        <li>Hard Equality -  ===, tests for equality but only returns true if and only if they are of the same data type</li>
+        <li>Inequality - !=</li>
+
+    </ul>
+
+</body>
+</html>
