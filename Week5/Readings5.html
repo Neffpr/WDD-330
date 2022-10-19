@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h3>Requirements to enter in the Diablo Rollercoster:</h3>
+
+    <div id="debugging"></div><br>
+    <div id="debugging2"></div><br>
+    <div id="debugging3"></div><br><br>
+
+    <div id="throwError"></div><br>
+
+    <div id="catchError"></div><br>
+
+    <div id="test"></div><br>
+
+    <div>
+        <p>
+            I couldn't complete the Jest test because the installation didn't work.
+            If you have any other ideas that I can use to install it, I would be very grateful :) thanks!
+            You can find more exercises on the console
+        </p>
+    </div>
+
+    <script>
+
+        document.getElementById("debugging").innerHTML = amIOldEnough(21)
+        document.getElementById("debugging2").innerHTML = amIOldEnough(15)
+        document.getElementById("debugging3").innerHTML = amIOldEnough(11)
+
+
+        amIOldEnough1(10);
+
+        function amIOldEnough1(age){
+            if (age < 12) {
+                alert(`You are too young to enter, you are only ${age}`);
+                return 'No, sorry.';
+            } else if (age < 18) {
+                return 'Only if you are accompanied by an adult.';
+            }
+            else {
+                return 'Yep, come on in!';
+            }
+        }
+
+        function amIOldEnough(age){
+            console.log(age);
+                if (age < 12) {
+                console.log(`In the if with ${age}`);
+                return 'No, sorry. You are too young to enter, you are only '+ age;
+                } else if (age < 18) {
+                console.log(`In the else-if with ${age}`);
+                return 'Only if you are accompanied by an adult. you are ' + age;
+                } else {
+                console.log(`In the else with ${age}`);
+                return 'Yep, come on in! have fun adult with ' + age;
+            }
+        }
+
+        document.getElementById("throwError").innerHTML=squareRoot(24);
+        // squareRoot(-1);
+
+        function squareRoot(number) {
+            'use strict';
+            if (number < 0) {
+                throw new RangeError("You can't find the square root of negative numbers");
+            }
+            return 'The root of '+ number + ' is ' + Math.sqrt(number);
+        };
+
+        
+        document.getElementById("catchError").innerHTML=imaginarySquareRoot(-49);;
+
+        function imaginarySquareRoot(number) {
+            'use strict';
+            let answer;
+            try {
+                answer = String(squareRoot(number));
+            } catch(error) {
+                answer = squareRoot(-number)+"i";
+            } finally {
+                return `+ or - ${answer}`;
+            }
+        }
+
+        document.getElementById("test").innerHTML=itSquareRoots4(4);
+
+        function itSquareRoots4(number) {
+            return squareRoot(number) === 2;
+        }
+
+        const box = {
+        locked: true,
+        unlock() { this.locked = false; },
+        lock() { this.locked = true;  },
+        _content: [],
+        get content() {
+            if (this.locked) throw new Error("Locked!");
+            return this._content;
+        }
+        };
+
+        function withBoxUnlocked(body) {
+        let locked = box.locked;
+        if (!locked) {
+            return body();
+        }
+
+        box.unlock();
+        try {
+            return body();
+        } finally {
+            box.lock();
+        }
+        }
+
+        withBoxUnlocked(function() {
+        box.content.push("gold piece");
+        });
+
+        try {
+        withBoxUnlocked(function() {
+            throw new Error("Pirates on the horizon! Abort!");
+        });
+        } catch (e) {
+        console.log("Error raised:", e);
+        }
+
+        console.log(box.locked);
+
+    </script>
+</body>
+</html>
