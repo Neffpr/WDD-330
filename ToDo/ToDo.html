@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Todos</h1>
+
+    <div>
+        <ul id="toDoList">
+            <li>Task</li>
+            <li>Task</li>
+            <li>Task</li>
+            <li>Task</li>
+            <li>Task</li>
+        </ul>
+    </div>
+    <div>
+        <span class="actionButton">HERE GOES A COUNT</span>
+        <span onclick="allTodos()" id="allTodos" class="actionButton">All</span>
+        <span onclick="activeTodos()" id="activeTodos" class="actionButton">Active</span>
+        <span onclick="completedTodos()" id="completedTodos" class="actionButton">Completed</span>
+    </div>
+    <div id="uncheckedItems"></div>
+    
+    <footer>
+        <input type="text" id="myInput" placeholder="Title...">
+        <span onclick="newElement()" class="actionButton">+</span>
+    </footer>
+
+
+    <script>
+        // Create a "close" button and append it to each list item
+        var taskList = document.getElementsByTagName("LI");
+        var i;
+        for (i = 0; i < taskList.length; i++) {
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            taskList[i].appendChild(span);
+        }
+
+        // Click on a close button to hide the current list item
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+
+
+        var unCheckedItems = document.getElementsByTagName("LI");
+        var checkedItems = [];
+        
+        // Add a "checked" symbol when clicking on a list item
+        var list = document.querySelector('ul');
+        list.addEventListener('click', function(ev) {
+            if (ev.target.tagName === 'LI') {
+                ev.target.classList.toggle('checked');    
+                // the list item has checked class
+                if (ev.target.classList == 'checked'){
+                //remove it from unchecked items
+                    unCheckedItems.pop(list);
+                //add it to the checked items
+                    checkedItems.push(list);
+                }
+                if (ev.target.classList != 'checked') {
+                //remove it form the checked list
+                    checkedItems.pop(list)
+                //add it to the unchecked list 
+                    unCheckedItems.push(list)
+                }
+            }
+        }, false);
+
+
+
+
+        // Create a new list item when clicking on the "Add" button
+        function newElement() {
+        var li = document.createElement("li");
+        var inputValue = document.getElementById("myInput").value;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+            alert("You must write something!");
+        } else {
+            document.getElementById("toDoList").appendChild(li);
+        }
+        document.getElementById("myInput").value = "";
+
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+            }
+        }
+        }
+
+        function activeTodos(){
+            var i=0;
+            for (i=0, i ,i++) {
+            document.getElementById("uncheckedItems").innerHTML = unCheckedItem;
+        }
+        }
+
+            
+
+
+    </script>
+
+</body>
+</html>
