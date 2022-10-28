@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readings Week 6</title>
+</head>
+<body>
+
+    <div id="div">
+        <h1>You can find the exercises outcomes in the Console </h1>
+    </div>
+
+    <script>
+        function sayHello(greeting='Hello'){
+            console.log(`${ greeting }, my name is ${ this.name }`);
+        }
+
+        const clark = { name: 'Clark' };
+        const bruce = { name: 'Bruce' };
+
+        sayHello.call(clark, 'How do you do');
+        // << 'Hello, my name is Clarke'
+
+        sayHello.call(bruce);
+        // << 'Hello, my name is Bruce'
+    
+
+        function square(x){
+            square.cache = square.cache || {};
+            if (!square.cache[x]) {
+                square.cache[x] = x*x;
+            }
+            return square.cache[x]
+        }
+
+        square(3);
+        // << 9
+
+        square(-11);
+        // << 121
+
+        square.cache;
+        // << {"3": 9, "-11": 121}
+
+
+        (function(){
+        const temp = 'World';
+        console.log(`Hello ${temp}`);
+        })();
+
+        (function() {
+            const name = 'Peter Parker'; // This might be obtained from a cookie in reality
+            const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday', 'Friday','Saturday'];
+            const date = new Date(),today = days[date.getDay()];
+            console.log(`Welcome back ${name}. Today is ${today}`);
+
+        })();
+        // << 'Welcome back Peter Parker. Today is Tuesday'
+
+        (function() {
+            // block A
+            const name = 'Block A';
+            console.log(`Hello from ${name}`);
+            }());
+
+            (function() {
+            // block B
+            const name = 'Block B';
+            console.log(`Hello from ${name}`);
+        }());
+
+        function party(){
+            console.log('Wow this is amazing!');
+            party = function(){
+                console.log('Been there, got the T-Shirt');
+            }
+        }
+
+        const beachParty = party;
+
+        beachParty();
+        party();
+        party();
+        beachParty();
+        party();
+
+        function factorial(n) {
+            if (n === 0) {
+                console.log(1);
+            } else {
+                console.log(n * factorial(n - 1));
+            }
+        }
+        factorial(3);
+
+        function collatz(n, sequence=[n]) {
+            if (n === 1){
+                console.log(`Sequence took ${sequence.length} steps.`);
+            }
+            if (n%2 === 0) {
+                n = n/2;
+            } else { 
+                n = 3*n + 1;
+            }
+            console.log(collatz(n,[...sequence,n]));
+        }
+
+        // collatz(2);
+
+        function wait(message, callback, seconds){
+            setTimeout(callback,seconds * 100);
+            console.log(message);
+        }
+
+        function selfDestruct(){
+            console.log('BOOOOM!');
+        }
+
+        wait('This tape will self-destruct in five seconds ... ', selfDestruct, 5);
+        console.log('Hmmm, should I accept this mission or not ... ?');
+
+        // << 'This tape will self-destruct in five seconds ... '
+        // << 'Hmmm, should I accept this mission or not ... ? '
+        // << 'BOOOOM!'
+
+        const dice = {
+            sides: 6,
+            roll() {
+                return Math.floor(this.sides * Math.random()) + 1;
+            }
+        }
+
+        console.log('Before the roll');
+
+        const roll = new Promise( (resolve,reject) => {
+            const n = dice.roll();
+            if(n > 1){
+                setTimeout(()=>{resolve(n)},n*200);
+            } else {
+                setTimeout(()=>reject(n),n*200);
+            }
+        });
+
+        roll.then(result => console.log(`I rolled a ${result}`) )
+        .catch(result => console.log(`Drat! ... I rolled a ${result}`) );
+
+        console.log('After the roll');
+
+
+        function random(a,b=1) {
+            // if only 1 argument is provided, we need to swap the values of a and b
+            if (b === 1) {
+                [a,b] = [b,a];
+            } 
+            console.log(Math.floor((b-a+1) * Math.random()) + a);
+        }
+        random(6);
+        random(10,20)
+
+        function returnHello() {
+            console.log('returnHello() called');
+            return function() {
+                console.log('Hello World!');
+            }
+        }
+        returnHello();
+        const hello = returnHello();
+        hello();
+
+        function greeter(greeting = 'Hello') {
+            return function() {
+                console.log(greeting);
+            }
+        }
+
+        const englishGreeter = greeter();
+        englishGreeter();
+        // << Hello
+
+        const frenchGreeter = greeter('Bonjour');
+        frenchGreeter();
+        // << Bonjour
+
+
+        const germanGreeter = greeter('Guten Tag');
+        germanGreeter();
+        // << Guten Tag
+
+
+        function outer() {
+            const outside = 'Outside!';
+            function inner() {
+                const inside = 'Inside!';
+                console.log(outside);
+                console.log(inside);
+            }
+            return inner;
+        }
+
+        const closure = outer();
+
+        closure();
+
+        function counter(start){
+            let i = start;
+            return function() {
+                console.log(i++);
+            }
+        }
+        const count = counter(1);
+        count();
+        count();
+        count();
+
+    </script>
+    
+</body>
+</html>
