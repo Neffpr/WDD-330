@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readings Week07</title>
+
+    <style>
+
+        body{
+            background-color: #28282B;
+        }
+
+        h1{
+            color: black;
+            background-color: lavender;
+            animation-name: appearDisappear;
+            animation-duration: 15s;
+            animation-timing-function: linear;
+        }
+
+        h1:hover span {
+            transform-origin: 20% 20%;
+            transform: translateY(40px) scale(1.5) rotate(10deg) skew(15deg, 4deg) ;
+            font-size: 30px;
+            color: #0090fd;
+            display: inline-block;
+
+        }
+
+        h1 span {
+            transition-property: transform, color;
+            /* transition-duration: 0.5s;
+            transition-timing-function: ease-out;
+            transition-delay: 50ms; */
+
+            /* let’s combine all those values into a shorthand declaration: */
+            transition: transform 0.5s ease-out 50ms;
+
+            /* You can also use the shorthand to specify multiple transitions at different durations, delays, and timing functions. */
+            transition: transform 0.5s ease-out 50ms, color 0.4s linear 50ms;
+
+            /* When using the all keyword, all the properties transition at the same rate, speed, and delay: */
+            transition: all 0.5s ease-out 50ms;
+
+
+        }
+
+        @keyframes moveRight { 
+            from {
+            transform: translateX(-50%);
+            }
+            to {
+            transform: translateX(50%);
+            }
+        }
+
+        @keyframes appearDisappear { 
+            0%, 100% {
+            opacity: 0;
+            }
+            20%, 80% {
+            opacity: 1;
+            }
+        }
+
+        @keyframes bgMove {
+            100% {
+            background-position: 120% 0;
+            }
+        }
+
+        @keyframes bike {
+            0% {
+            background-position: 0 0;
+            }
+            100% {
+            background-position: -360px 0;
+            }
+        }
+        @keyframes move {
+            0% {
+            transform: translateX(-100px);
+            }
+            100% {
+            transform: translateX(100px);
+            }
+        }  
+            
+        h1:after {
+            content: '';
+            width: 90px;
+            height: 92px;
+            background-image: url(bike_sprite.png);
+            display: block;
+            margin: auto;
+            animation: 
+                0.4s steps(4, end) infinite 50ms bike,
+                8s linear infinite 50ms move;
+            animation-play-state: paused;
+        }
+        h1:hover:after {
+            animation-play-state: running;
+        }
+
+        .myCanvas {
+            border: dotted 2px lavender;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Nefi Israel <span>Perez</span> Reyes</h1>
+    <canvas id="myCanvas" class="myCanvas" width="200" height="200">
+        Sorry! Your browser doesnt support Canvas.
+    </canvas>
+
+    <canvas id="demo2" class="myCanvas" width="200" height="200">
+        Sorry! Your browser doesnt support Canvas.
+    </canvas>
+    
+    <canvas id="demo3" class="myCanvas" width="200" height="200">
+        Sorry! Your browser doesnt support Canvas.
+    </canvas>
+
+    <canvas id="demo4" class="myCanvas" width="200" height="200">
+        Sorry! Your browser doesnt support Canvas.
+    </canvas>
+
+    <h2>Demo 5: Saving canvas drawings</h2>
+    <canvas width="200" height="200" id="demo5" class="myCanvas">
+        Sorry! Your browser doesn't support Canvas.
+    </canvas>
+    <button name="saveButton" id="saveButton">Save Drawing</button>
+
+<img data-src="https://learnable-static.s3.amazonaws.com/premium/reeedr/books/html5-css3-for-the-real-world-2nd-edition/images/html5-logo.png" id="myImageElem">
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var context = canvas.getContext("2d");
+        context.strokeStyle = "red";
+        context.fillStyle = "rgba(0, 0, 255, 0.5)";
+        // The canvas coordinate system, the top-left corner is (0,0). 
+        // If the canvas is 200 pixels by 200 pixels, then the bottom-right corner is (200,200)
+        context.fillRect(10, 10, 100, 100);   
+        context.strokeRect(10, 10, 100, 100);
+
+        (function drawPattern() {
+            var canvas = document.getElementById("demo2");
+            var context = canvas.getContext("2d");
+            context.strokeStyle = "red";
+            
+            var img = new Image();
+            img.src = "bike_sprite.png";
+            img.onload = function() { 
+                var pattern = context.createPattern(img, "repeat"); 
+                context.fillStyle = pattern;                        
+                context.fillRect(10, 10, 100, 100);                  
+                context.strokeRect(10, 10, 100, 100);   
+            };            
+        })();
+
+        (function drawGradient() {
+            var canvas = document.getElementById("demo3");
+            var context = canvas.getContext("2d");
+            context.strokeStyle = "red";
+            var gradient = context.createLinearGradient(0, 0, 0, 200);
+            gradient.addColorStop(0, "blue"); 
+            gradient.addColorStop(1, "white"); 
+            context.fillStyle = gradient; 
+            context.fillRect(10, 10, 100, 100); 
+            context.strokeRect(10, 10, 100, 100); 
+        })();
+
+        (function drawCircle(canvas) {
+            var canvas = document.getElementById("demo4");
+
+            var context = canvas.getContext("2d");
+            context.beginPath();
+            context.arc(100, 100, 50, 0, Math.PI*2, true);
+            context.closePath(); 
+            context.strokeStyle = "red";
+            context.fillStyle = "rgba(0, 0, 255, 0.5)";
+            context.lineWidth = 3;
+            context.fill(); 
+            context.stroke(); 
+        })();
+
+        var button = document.getElementById("saveButton");
+        button.addEventListener("click", saveDrawing, false);
+        function saveDrawing() {
+            var canvas5 = document.getElementById("demo5");
+            window.open(canvas5.toDataURL("image.png"));
+            
+        }
+        </script>
+</body>
+</html>
